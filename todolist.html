@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ugly To Do List</title>
+  </head>
+  <body>
+    TEST HTML
+    
+    <script>
+      var todolist = {
+        todos: [],
+        displayToDos: function(){
+          if (this.todos.length === 0){
+            console.log("Empty todolist");
+          } else{
+            for (var i = 0; i < this.todos.length; i++){
+              if (this.todos[i].completed === true){
+                console.log('(x)', this.todos[i].todoText);
+              } else  {
+                console.log('( )', this.todos[i].todoText);
+              }
+            }
+          }
+        },
+        addToDo: function(todoText){
+          this.todos.push({
+            todoText: todoText,
+            completed: false
+          });
+          this.displayToDos();
+        },
+        changeToDo: function(position, todoText){
+          this.todos[position].todoText = todoText;
+          this.displayToDos();
+        },
+        deleteToDo: function(position){
+          this.todos.splice(position, 1);
+          this.displayToDos();
+        },
+        toggleCompleted: function(position){
+          this.todos[position].completed = !this.todos[position].completed;
+          this.displayToDos();
+        },
+        toggleAll: function(){
+          var totalTodos = this.todos.length;
+          var completedTodos = 0;
+          for (var i = 0; i< totalTodos; i++){
+            if (this.todos[i].completed === true){
+              completedTodos++;
+            }
+          }
+          // Case 1: If everything true, make everything false
+          if (completedTodos === totalTodos){
+            for (var i = 0; i<totalTodos; i++){
+              this.todos[i].completed = false;
+            } else {
+          // Case 2: Otherwise, make everything true
+            for (var i = 0; i<totalTodos; i++){
+              this.todos[i]. completed = true;
+            }
+            }
+          }
+          this.displayToDos();
+        }
+      };
+
+    </script>
+  </body>
+</html>
