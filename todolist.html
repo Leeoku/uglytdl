@@ -6,7 +6,6 @@
   <body>
     <h1>To Do List</h1>
     <div>
-      <button onclick="handlers.displayToDos()">Display Todos1</button>
       <button onclick="handlers.toggleAll()">Toggle All1</button>
     </div>
 
@@ -17,15 +16,9 @@
     </div>
 
     <div>
-      <button onclick = "handlers.changeTodos()">Todo</button>
+      <button onclick = "handlers.changeTodos()">Change Todo</button>
       <input id = "changeTodoPositionInput" type = "number">
       <input id = "changeTodoTextInput" type = "text">
-
-    </div>
-
-    <div>
-      <button onclick = "handlers.deleteTodos()"> Delete</button>
-      <input id = "deleteTodoPositionInput" type = "number">
 
     </div>
 
@@ -34,6 +27,9 @@
       <input id = "toggleCompletedPositionInput" type = "number">
 
     </div>
+
+    <ul>      
+    </ul>
     <script src = "script.js">
     </script>
   </body>
