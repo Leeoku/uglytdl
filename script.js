@@ -32,22 +32,43 @@ var todolist = {
   toggleAll: function(){
     var totalTodos = this.todos.length;
     var completedTodos = 0;
-    for (var i = 0; i< totalTodos; i++){
-      if (this.todos[i].completed === true){
+    // for (var i = 0; i< totalTodos; i++){
+    //   if (this.todos[i].completed === true){
+    //     completedTodos++;
+    //   }
+    // }
+
+    this.todos.forEach(function(todo){
+      if (todo.completed === true){
         completedTodos++;
       }
-    }
+    });
     // Case 1: If everything true, make everything false
-    if (completedTodos === totalTodos){
-      for (var i = 0; i<totalTodos; i++){
-        this.todos[i].completed = false;
-        }
-      } else {
-    // Case 2: Otherwise, make everything true
-      for (var i = 0; i<totalTodos; i++){
-        this.todos[i].completed = true;
+    // if (completedTodos === totalTodos){
+    //   this.todos.forEach(function(todo){
+    //     todo.completed = false;
+    //   });
+    //   // for (var i = 0; i<totalTodos; i++){
+    //   //   this.todos[i].completed = false;
+    //   //   }
+    //   } else {
+    // // Case 2: Otherwise, make everything true
+    //   // for (var i = 0; i<totalTodos; i++){
+    //   //   this.todos[i].completed = true;
+    //   // }
+    //   this.todos.forEach(function(todo){
+    //     todo.completed = true;
+    //   });
+    // }
+    this.todos.forEach(function(todo){
+      // CASE 1 IF EVERYTHING TRUE MAKE FALSE
+      if (completedTodos === totalTodos){
+        todo.completed = false;
+      // CASE 2
+      } else  {
+        todo.completed = true;
       }
-    }
+    });
   }
 };
 
@@ -76,13 +97,9 @@ var handlers = {
     view.displayTodos();
   },
   toggleAll: function(){
-    todolist.toggleAll(); },
-    addTodos: function(){
-      var addTodoTextInput = document.getElementById('addTodoTextInput');
-      todolist.addToDo(addTodoTextInput.value);
-      addTodoTextInput.value = '';
-      view.displayTodos();
-      }
+    todolist.toggleAll(); 
+    view.displayTodos();
+  }
 };
 
 var view = {
@@ -90,20 +107,33 @@ var view = {
     // Initiate the UL and make an li depending on the lenght
     var todosUl = document.querySelector('ul');
     todosUl.innerHTML = '';
-    for (var i = 0; i < todolist.todos.length; i++){
+    todolist.todos.forEach(function(todo, position){
       var todoLi = document.createElement('li');
-      var todo = todolist.todos[i];
       var todoTextWithCompletion = '';
       if (todo.completed === true){
         todoTextWithCompletion = '(x)' + todo.todoText + ' ';
       } else {
         todoTextWithCompletion = '( )' + todo.todoText + ' ';
       }
-      todoLi.id = i;
+      todoLi.id = position;
       todoLi.textContent = todoTextWithCompletion;
       todoLi.appendChild(this.createDeleteButton());
       todosUl.appendChild(todoLi);
-    }
+    }, this);
+    // for (var i = 0; i < todolist.todos.length; i++){
+    //   var todoLi = document.createElement('li');
+    //   var todo = todolist.todos[i];
+    //   var todoTextWithCompletion = '';
+    //   if (todo.completed === true){
+    //     todoTextWithCompletion = '(x)' + todo.todoText + ' ';
+    //   } else {
+    //     todoTextWithCompletion = '( )' + todo.todoText + ' ';
+    //   }
+    //   todoLi.id = i;
+    //   todoLi.textContent = todoTextWithCompletion;
+    //   todoLi.appendChild(this.createDeleteButton());
+    //   todosUl.appendChild(todoLi);
+    // }
   },
   createDeleteButton: function(){
     var deleteButton = document.createElement('button');
